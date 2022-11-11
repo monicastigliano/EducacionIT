@@ -97,25 +97,76 @@ for (let i = 0; i < 6; i++) {
     array_energia[i] = energ;
 }
 
-class Efectividad {
-    constructor(nombre, efect) {
-        this.nombre = nombre;
-        this.efect = efect;
-    }
-}
+// class Efectividad {
+//     constructor(nombre, efect) {
+//         this.nombre = nombre;
+//         this.efect = efect;
+//     }
+// }
 
-let e_g_t;
-let p_t;
-let t_t;
-let array_efectividad = []
-for (let i = 0; i < array_energia.length; i++) {
-    e_g_t = parseFloat(array_energia[i].energia_gener);
-    p_t = parseFloat(array_energia[i].presup);
-    t_t = parseFloat(array_energia[i].tiempo_estim);
-    let ef = (e_g_t / (p_t * t_t));
-    let elemto_efect = new Efectividad(array_energia[i].t_energia, ef);
-    array_efectividad[i] = elemto_efect;
+// let e_g_t;
+// let p_t;
+// let t_t;
+// let array_efectividad = []
+// for (let i = 0; i < array_energia.length; i++) {
+//     e_g_t = parseFloat(array_energia[i].energia_gener);
+//     p_t = parseFloat(array_energia[i].presup);
+//     t_t = parseFloat(array_energia[i].tiempo_estim);
+//     let ef = (e_g_t / (p_t * t_t));
+//     let elemto_efect = new Efectividad(array_energia[i].t_energia, ef);
+//     array_efectividad[i] = elemto_efect;
+// }
+// array_efectividad.forEach(element => {
+//     alert('La Energía ' + element.nombre + ' tiene ' + element.efect + ' de Efectividad')
+// });
+
+// Etapa 3
+
+// Para realizar esta etapa debes seguir estos
+// pasos:
+// 1. Vamos a convertir nuestro código en una
+// función que tenga la siguiente definición:
+// (array de datos) => objeto de estadísticas
+// La función recibirá un array de objetos con
+// todos los datos de la tabla, y deberá retornar
+// un objeto con la eficiencia por tipo de
+// energía.
+// 2. Junto con las eficiencias, la función deberá
+// retornar la energía recomendada (cuya
+// eficiencia es mayor).
+
+var eficiencia_energia = function(array_de_datos){
+    class Efectividad {
+        constructor(nombre, efect) {
+            this.nombre = nombre;
+            this.efect = efect;
+        }
+    }
+    let e_g_t;
+    let p_t;
+    let t_t;
+    let max = 0;
+    let nombre = '';
+    let array_efectividad = [];
+    for (let i = 0; i < array_de_datos.length; i++) {
+        e_g_t = parseFloat(array_de_datos[i].energia_gener);
+        p_t = parseFloat(array_de_datos[i].presup);
+        t_t = parseFloat(array_de_datos[i].tiempo_estim);
+        let ef = (e_g_t / (p_t * t_t));
+        let elemto_efect = new Efectividad(array_de_datos[i].t_energia, ef);
+        array_efectividad[i] = elemto_efect;
+    }
+    array_efectividad.forEach(element => {
+            if (element.efect > max){
+                nombre = element.nombre;
+                max = element.efect;
+            }
+    });
+    // alert('La Energía recomendada es ' + nombre + ' tiene ' + element.efect + ' de Efectividad')
+    let recomendada = new Efectividad(nombre, max)
+    array_efectividad.push(recomendada);
+    console.log(array_efectividad)
+    return array_efectividad;
 }
-array_efectividad.forEach(element => {
-    alert('La Energía ' + element.nombre + ' tiene ' + element.efect + ' de Efectividad')
-});
+let efectividad_final= eficiencia_energia(array_energia)
+alert('La Energía recomendada es ' + efectividad_final[efectividad_final.length-1].nombre + ' tiene ' + efectividad_final[efectividad_final.length-1].efect + ' de Efectividad');

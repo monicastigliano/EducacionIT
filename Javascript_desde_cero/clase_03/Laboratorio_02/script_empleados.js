@@ -1,4 +1,14 @@
 
+//el resultado final será:
+// ************************************************
+// Hola, User, bienvenido a nuestra aplicación.
+
+//              Nombre Apellido Edad
+//               Juan   Pablo    40
+//               Ana    García   25
+//               María  Zarate   34
+// ************************************************
+
 var nombre = prompt('Cuál es su su nombre de usuario');
         enunciado.innerHTML = 'Hola ' + nombre + ', bienvenido/a a nuestra aplicación.';
 let array_empleados = [
