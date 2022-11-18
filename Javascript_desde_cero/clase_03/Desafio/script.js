@@ -7,7 +7,7 @@
 // muestre el flujo de caja del último año. El flujo de
 // caja es la descripción de cómo varía el dinero a lo
 // largo del tiempo.
-// Un ejemplo puede ser el de la derecha,
+// Un ejemplo puede ser el de abajo,
 // correspondiente a una empresa que gana más
 // dinero cada mes por ventas.
 // Si hay más ingresos que egresos, significa que se
