@@ -214,7 +214,7 @@ class Efectividad {
         this.nombre = nombre;
         this.efect = efect;
         this.getEfectividad = function() {
-            var filaEfectHTML = '<h2>Tipo de Energía: ' + this.nombre + ' | Efectividad: ' + this.efect + '</h2>';
+            var filaEfectHTML = '<h3>Tipo de Energía: ' + this.nombre + ' | Efectividad: ' + this.efect + '</h3>';
             return filaEfectHTML;
         }
     }
@@ -258,5 +258,31 @@ btn_procesar.onclick = function(e){
             max = array_efectividad[i].efect;
         }
     }
-    energia_recomendada.innerHTML = '<h2>La Energía recomendada es ' + nombre + ' tiene ' + max + ' de Efectividad</h2>';
+    energia_recomendada.innerHTML = '<h3>La Energía recomendada es ' + nombre + ' tiene ' + max + ' de Efectividad</h3>';
 }
+
+// Etapa 5
+// Pasos a seguir para realizar esta etapa:
+// 1. La Interfaz debe empezar con un formulario
+// para introducir las filas de la tabla. Como se
+// va a procesar las filas basándose en el tipo
+// de energía convendría que ese campo sea
+// un <select> así se evitan errores de
+// mayúsculas/minúsculas.
+// 2. La interfaz deberá tener dos botones:
+// ○ El botón AGREGAR IMPLEMENTACIÓN
+// sirve para agregar un nuevo registro al
+// array de los datos que serán procesados.
+// ○ El botón PROCESAR RESULTADOS deberá
+// utilizar el array previamente cargado para
+// obtener la eficiencia por tipo de energía y
+// la energía recomendada.
+// 3. La interfaz deberá contar con un panel en
+// donde se puedan ir viendo los resultados a
+// medida que se van cargando.
+// ○ Al hacer clic en AGREGAR IMPLEMENTACIÓN, se deberá visualizar en este panel
+// todas las filas actuales.
+// ○ Al hacer clic en PROCESAR RESULTADOS,
+// se deberá visualizar el resultado final.
+
+

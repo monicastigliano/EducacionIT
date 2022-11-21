@@ -3,7 +3,7 @@
     box-sizing: border-box;
 }
 .contenedor_formulario{
-    width: 300px;
+    width: 25%;
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -14,6 +14,9 @@
     display: flex;
     background-color: #3B3B3B;
     justify-content: space-around;
+}
+.contenedor_informacion{
+    width: 75%;
 }
 .formulario{
     width: 260px;
