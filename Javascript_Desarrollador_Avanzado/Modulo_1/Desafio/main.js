@@ -53,6 +53,7 @@ let carrito = function(nuevoProducto, quitarProducto){
         let pc = new productoCarrito(nuevoProducto.nombre, nuevoProducto.precio)
         carrito.push(pc);
     }
+    
     carrito['pc'].cantidadPedida++
     carrito['pc'].total += nuevoProducto.precio
     
