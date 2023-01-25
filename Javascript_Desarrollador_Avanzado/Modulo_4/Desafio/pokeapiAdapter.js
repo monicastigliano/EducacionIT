@@ -15,20 +15,16 @@ un callback, que será ejecutado con la respuesta cuando ésta esté disponible.
 
  */
 
-function ajax(url, cb){
-    let xhr = new XMLHttpRequest()
-    xhr.open('get', url)
+function getFromPokeApi(url, callback){
+    let xhr = new XMLHttpRequest
+    xhr.open('get', 'https://pokeapi.co/api/v2/ability/' + url)
     xhr.addEventListener('load', ()=>{
         if(xhr.status === 200){
-            cb(xhr.response)
-            console.log
+            console.log(JSON.parse(xhr.response)) 
+            callback(JSON.parse(xhr.response))
         } else console.log(xhr.statusText);
     })
     xhr.send()
-}
-
-function getFromPokeApi(url, cb){
-    ajax(url, cb)
 }
 
 
@@ -45,12 +41,12 @@ todos los pokemons, y el detalle de uno solo, respectivamente.
 
 function getAllPokemons(callback)
 {
-    getFromPokeApi('https://pokeapi.co/api/v2/', callback);
+    getFromPokeApi(callback);
 }
 
 function getOnePokemon(id, callback)
 {
-    getFromPokeApi(`pokemon/${id}/`, function(pokemon){
+    getFromPokeApi(`${id}/`, function(pokemon){
         callback({
             nombre: pokemon.name,
             peso: pokemon.weight,
@@ -60,7 +56,9 @@ function getOnePokemon(id, callback)
     });
 }
 
-
 getOnePokemon(12, function(poke){
     console.log(poke);
 });
+
+
+
