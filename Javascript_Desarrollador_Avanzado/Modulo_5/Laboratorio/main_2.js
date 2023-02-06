@@ -190,7 +190,7 @@ function portfolioLoad(){
                             console.log(usu);
                             let lista = ''
                             usu.forEach(usuario => {
-                                lista += '<li>' + usuario.name + '</li>'
+                                lista += `<li> ${usuario.name}</li>`
                             })
                             ul.innerHTML = lista
                             main.appendChild(ul)

@@ -25,7 +25,6 @@ const plantilla = Handlebars.compile(`<ul>
 </ul>`)
 $('#btnAgregar').click(function(){
   
-  
   $('#items').before(plantilla({
     nombre: nombre.value,
     apellido: apellido.value

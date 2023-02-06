@@ -17,15 +17,16 @@ un callback, que será ejecutado con la respuesta cuando ésta esté disponible.
 
 function getFromPokeApi(url, callback){
     let xhr = new XMLHttpRequest
-    xhr.open('get', 'https://pokeapi.co/api/v2/ability/' + url)
+    xhr.open('get', url)
     xhr.addEventListener('load', ()=>{
         if(xhr.status === 200){
-            console.log(JSON.parse(xhr.response)) 
-            callback(JSON.parse(xhr.response))
-        } else console.log(xhr.statusText);
+            console.log(JSON.parse(xhr.response).results)
+            callback(JSON.parse(xhr.response).results)
+        }
     })
     xhr.send()
 }
+// getFromPokeApi('https://pokeapi.co/api/v2/pokemon')
 
 
 /**
@@ -39,26 +40,38 @@ todos los pokemons, y el detalle de uno solo, respectivamente.
  */
 
 
-function getAllPokemons(callback)
-{
-    getFromPokeApi(callback);
-}
-
-function getOnePokemon(id, callback)
-{
-    getFromPokeApi(`${id}/`, function(pokemon){
-        callback({
-            nombre: pokemon.name,
-            peso: pokemon.weight,
-            altura: pokemon.height,
-            imc: pokemon.weight / pokemon.height
-        });
+function getAllPokemons(elementos){
+    let ul = document.createElement('ul')
+    let poks = ''
+    elementos.forEach(element => {
+        poks += `<li>${element.name}</li>`
     });
+    ul.innerHTML = poks
+    document.querySelector('main').appendChild(ul)
 }
 
-getOnePokemon(12, function(poke){
-    console.log(poke);
-});
+function getOnePokemon(element, id){
+    let ul = document.createElement('ul')
+    let pok = ''
+    let existe = false
+    let i = 0
+    while(!existe || element.length < i){
+        if(element.id === id) existe = true
+        else i++
+    }
+    if(existe) pok += `<li>${element.id}</li>`
+    
+    console.log(pok);
+    ul.innerHTML = pok
+    document.querySelector('main').appendChild(ul)
+}
+
+getFromPokeApi('https://pokeapi.co/api/v2/pokemon', getAllPokemons)
+getFromPokeApi('https://pokeapi.co/api/v2/pokemon', getOnePokemon)
+    
+
+
+
 
 
 
