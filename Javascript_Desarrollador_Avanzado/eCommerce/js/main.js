@@ -70,43 +70,6 @@ const getArticulos = () => ([
         "id": "14"
     }
 ])
-    // <form >
-    //     <input id="buscar" type="text" class="input col-ms-2 col-md-5"></input>
-    //     <button id="btn_buscar" type="submit" class="btn btn-outline-secondary col-md-3 col-ms-2 rounded-pill">Buscar</button>
-    // </form>
-function render (datos){
-    let plantilla_principal = Handlebars.compile(`<div class="card container col-md-10 col-sm-2 " >
-            <div class="card-body text-center container">
-            <h1 class="card-title pb-5 fw-bold">Tienda</h1>
-            <input id="buscar" type="text" placeholder="Buscar producto..." class="input col-ms-2 col-md-5  border rounded"></input>
-
-            <select id="select" class="form-select mb-5 mt-5 border-0  container" style="width: 12rem;" aria-label="Default select example">
-                <option selected>Ordenar por...</option>
-                <option value="nombre">Nombre</option>
-                <option value="precio">Precio</option>
-                <option value="id">id</option>
-              </select>
-              <div  id="art"  class="container card mb-3 p-3" style="max-width: 540px; border-radius: 0%;">
-              {{#each datos}}
-                <div class="row g-0">
-                    <div class="col-md-4">
-                    <img src={{urlImagen}} class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8 text-center">
-                    <div class="card-body ">
-                        <h5 class="card-title pb-5 fw-bold">{{nombre}}</h5>
-                        <h5 class="card-title fw-bold">$ {{precio}}</h5>
-                    </div>
-                    </div>
-                </div>
-                {{/each}}
-                </div>
-        </div>
-      </div>`)
-    document.getElementById('view').innerHTML = plantilla_principal(datos)
-    
-}
-
 
 
 function render_seleccion (datos){
@@ -127,82 +90,89 @@ function render_seleccion (datos){
       
     document.getElementById('art').innerHTML = plantilla_seleccion(datos)
 }
-
-function homePage(data){
-    render({
-        datos: data   
-    })
+function  filtrar_busquesa(val){
+    let los_articulos = getArticulos()
+    let resultado = los_articulos.filter(el => el.nombre.includes(val))
+    render_seleccion({datos: resultado})
+}
+function filtrar_seleccion(val){
+    let los_articulos = getArticulos()
+    switch (val) {
+        case 'nombre': 
+            los_articulos.sort((a, b)=>{
+                if(a.nombre < b.nombre){
+                    return -1
+                }
+                if(a.nombre > b.nombre){
+                    return 1
+                }
+                return 0
+            })
+            render_seleccion({datos: los_articulos})
+        break;
     
+        case 'precio':
+            los_articulos.sort((a, b)=>{
+                if(parseInt(a.precio) < parseInt(b.precio)){
+                    return -1
+                }
+                if(parseInt(a.precio) > parseInt(b.precio)){
+                    return 1
+                }
+                return 0
+            })
+            render_seleccion({datos: los_articulos})
+        break;
+    
+        case 'id': 
+            los_articulos.map(el=>parseInt(el.id)).sort((a, b)=>{
+                if(parseInt(a.id) < parseInt(b.id)){
+                    return -1
+                }
+                if(parseInt(a.id) > parseInt(b.id)){
+                    return 1
+                }
+                return 0  
+            })
+            render_seleccion({datos: los_articulos})
+        break;
+    
+        default:
+            break;
+    }
 }
 
-
-window.addEventListener('load', ()=>{
-    homePage(getArticulos)
-    document.getElementById('select').addEventListener('change', (e)=>{
-        let valor = e.target.value
-        console.log(valor);
-        let los_articulos = getArticulos()
-        switch (valor) {
-            case 'nombre': 
-                los_articulos.sort((a, b)=>{
-                    if(a.nombre < b.nombre){
-                        return -1
-                    }
-                    if(a.nombre > b.nombre){
-                        return 1
-                    }
-                    return 0
-                    
-                })
-                console.log(los_articulos)
-                render_seleccion({datos: los_articulos})
-            break;
-        
-            case 'precio':
-                // let los_articulos_numeros =los_articulos.splice(el=>parseInt(el.precio))
-                // console.log(los_articulos_numeros);
-                los_articulos.sort((a, b)=>{
-                    if(parseInt(a.precio) < parseInt(b.precio)){
-                        return -1
-                    }
-                    if(parseInt(a.precio) > parseInt(b.precio)){
-                        return 1
-                    }
-                    return 0
-                })
-                console.log(los_articulos)
-                render_seleccion({datos: los_articulos})
-                
-            break;
-        
-            case 'id': 
-                los_articulos.map(el=>parseInt(el.id)).sort((a, b)=>{
-                    if(parseInt(a.id) < parseInt(b.id)){
-                        return -1
-                    }
-                    if(parseInt(a.id) > parseInt(b.id)){
-                        return 1
-                    }
-                    return 0
-                    
-                })
-                console.log(los_articulos)
-                render_seleccion({datos: los_articulos})
-            break;
-        
-            default:
-                break;
+function homePage(){
+        let array_selecccion = ['nombre', 'precio', 'id']
+        let query = location.search 
+        console.log(query);
+        if( query != ''){
+            let params = new URLSearchParams(query)
+            if(params.get('q')){
+                //cadena de búsqueda
+                let q = params.get('q')
+                console.log(q);
+                filtrar_busquesa(q)
+            } else 
+                if(params.get('s')){
+                    //cadena de selección
+                    let s = params.get('s')
+                    console.log('s ' + s);
+                    if(array_selecccion.includes(s)){
+                        filtrar_seleccion(s)
+                    } else console.log('No existe esa selección');
+                }
         }
-    })
-    document.getElementById('buscar').addEventListener('change', (e)=>{
+}
+renderPage('plantilla_pricipal.hbs', {datos: getArticulos}, ()=>{ 
+    document.getElementById('formulario').addEventListener('submit', (e)=>{
         e.preventDefault()
-        let input_valor = document.getElementById('buscar').value
-        console.log(input_valor)
-        let los_articulos = getArticulos()
-        let resultado = los_articulos.filter(el => el.nombre.includes(input_valor))
-        render_seleccion({datos: resultado})
-        console.log(resultado)
+        console.log(e.target[0].value);
+        history.pushState({}, '', `/?q=${e.target[0].value}&s=${e.target[1].value}`);
+        homePage()
     })
 })
+
+
 
 
