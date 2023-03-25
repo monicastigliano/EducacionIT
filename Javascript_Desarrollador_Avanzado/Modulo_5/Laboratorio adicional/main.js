@@ -1,4 +1,4 @@
-let array = [1, 2, 3, 4, 5]
+let array = [1, 2, 3, 4, 5, 30]
 
 //const count = (array_num) => new Promise((res) => res(array_num.length));
 let count = new Promise((a, b) =>{
