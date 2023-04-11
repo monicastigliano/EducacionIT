@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import DetailsPage from './Componentes/DetailsPage';
+import CartPage from './Componentes/CartPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
-    <DetailsPage />
+    // <App/>
+    // <DetailsPage/>
+    <CartPage/>
   
 );
 

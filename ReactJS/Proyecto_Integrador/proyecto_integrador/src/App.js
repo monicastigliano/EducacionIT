@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       <h1>MioMio</h1>
-      <button>Carrito</button>
+      <button className='btn_redondo'>Carrito</button>
       <div className='divisor'></div>
       <input placeholder='Tu búsqueda'></input>    
       <div className='tarjeta tarjetaUno'>

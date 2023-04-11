@@ -4,9 +4,9 @@ function DetailsPage() {
   return (
     <div className="App">
         <h1>MioMio</h1>
-        <button >Carrito</button>
+        <button className='btn_redondo'>Carrito</button>
         <div className='divisor'></div>
-        <button className='btn_volver'>Volver</button>   
+        <button className='btn_volver btn_redondo'>Volver</button>   
         <div className='tarjeta tarjetaUno'></div>
         <div className='detalle_parrafo'>
             <h2>Lorem Ipsum</h2>
@@ -17,7 +17,7 @@ function DetailsPage() {
             <div>Talles: D - M - L</div>
             <h3>Precio: $1500</h3>
         </div>
-        <button className='btn_loQuiero'>LO QUIERO</button>
+        <button className='btn_loQuiero btn_redondo'>LO QUIERO</button>
     </div>
   );
 }
