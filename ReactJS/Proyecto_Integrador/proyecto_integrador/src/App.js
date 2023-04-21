@@ -1,22 +1,20 @@
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CartPage from './pages/cart/CartPage';
+import DetailsPage from './pages/details/DetailsPage';
+import IndexPage from './pages/index/IndexPage';
 
 function App() {
   return (
-    <div className="App">
-      <h1>MioMio</h1>
-      <button className='btn_redondo'>Carrito</button>
-      <div className='divisor'></div>
-      <input placeholder='Tu búsqueda'></input>    
-      <div className='tarjeta tarjetaUno'>
-        <p>Lorem Ipsum</p>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path='/cart' element={<CartPage />} />
+          <Route path='/details/:id' element={<DetailsPage />} />
+          <Route path='/' element={<IndexPage />} />
+        </Routes>
       </div>
-      <div className='tarjeta tarjetaDos'>
-        <p>Lorem Ipsum</p>
-      </div>
-      <div className='tarjeta tarjetaTres'>
-        <p>Lorem Ipsum</p>
-      </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

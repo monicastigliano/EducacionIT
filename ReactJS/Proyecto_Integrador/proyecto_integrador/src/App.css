@@ -45,16 +45,7 @@
   width: 250px;
   height: 250px;
 }
-.tarjetaUno{
-  background-image: url(./Fotos/Anteojos/ali-pazani-GwglcplmXDs-unsplash.jpg.webp);
-}
 
-.tarjetaDos{
-  background-image: url(./Fotos/Anteojos/Anteojos.jpg.webp);
-}
-.tarjetaTres{
-  background-image: url(./Fotos/Anteojos/apostolos-vamvouras-mKi4QEJXRCs-unsplash.jpg.webp);
-}
 
 .tarjeta p{
   display: flex;
